@@ -1,14 +1,24 @@
 #include <mbed.h>
+#include <RH_RF95.h>
+#include <mildabus.h>
+
+#include "gpio.h"
+#include "lora.h"
+
+void mama_initialize(void);
 
 int main() {
 
-  // put your setup code here, to run once:
-  DigitalOut myLed(LED2);
+  mama_initialize();
+
   while(1) {
     // put your main code here, to run repeatedly:
-    myLed.write(1);
-    thread_sleep_for(100);
-    myLed.write(0);
     thread_sleep_for(1000);
   }
+}
+
+void mama_initialize(){
+  gpio_init();
+  mildabus_prepare();
+  lora_init();
 }

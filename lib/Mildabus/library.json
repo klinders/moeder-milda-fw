@@ -1,0 +1,15 @@
+{
+    "name": "Mildabus",
+    "version": "0.0.1",
+    "license": "MIT-licence",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/klinders97/mildabus.git"
+    },
+    "authors":
+    {
+        "name": "Koen Linders",
+        "email": "klinders52@gmail.com"
+    }
+}
