@@ -30,13 +30,16 @@
 #include "lora.h"
 
 CAN can1(PB_8, PB_9);
+DigitalOut led_1(LED1);
+DigitalOut led_2(LED2);
 
 void mama_initialize(void);
 
 int main() {
 
   mama_initialize();
-
+  led_1.write(1);
+  //led_2.write(1);
   while(1) {
     // put your main code here, to run repeatedly:
     thread_sleep_for(1000);
