@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 #include <mbed.h>
+#include "CAN.h"
 #include <RH_RF95.h>
 #include <mildabus.h>
 
 #include "gpio.h"
 #include "lora.h"
+
+CAN can1(PB_8, PB_9);
 
 void mama_initialize(void);
 
@@ -42,6 +45,6 @@ int main() {
 
 void mama_initialize(){
   gpio_init();
-  mildabus_prepare();
+
   lora_init();
 }
