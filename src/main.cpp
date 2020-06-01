@@ -32,7 +32,7 @@ CAN can1(CAN1_RX, CAN1_TX);
 DigitalOut led_1(LED1);
 DigitalOut led_2(LED2);
 // Setup Mildabus in master mode
-Mildabus bus1(can1, true);
+Mildabus bus1(&can1, true);
 
 void mama_initialize(void);
 
@@ -43,7 +43,6 @@ int main() {
   //led_2.write(1);
   while(1) {
     // put your main code here, to run repeatedly:
-    thread_sleep_for(1000);
   }
 }
 
@@ -51,4 +50,5 @@ void mama_initialize(){
   gpio_init();
   bus1.prepare();
   lora_init();
+  
 }
