@@ -22,16 +22,17 @@
  * SOFTWARE.
  */
 #include <mbed.h>
-#include "CAN.h"
 #include <RH_RF95.h>
-#include <mildabus.h>
+#include <Mildabus.h>
 
 #include "gpio.h"
 #include "lora.h"
 
-CAN can1(PB_8, PB_9);
+CAN can1(CAN1_RX, CAN1_TX);
 DigitalOut led_1(LED1);
 DigitalOut led_2(LED2);
+// Setup Mildabus in master mode
+Mildabus bus1(can1, true);
 
 void mama_initialize(void);
 
@@ -48,6 +49,6 @@ int main() {
 
 void mama_initialize(){
   gpio_init();
-
+  bus1.prepare();
   lora_init();
 }
