@@ -265,13 +265,10 @@ typedef enum {
 #endif
 
     // Generic signals namings
-    LED1        = PD_13, // LD3 as LD1 is not a user LED
-    LED2        = PD_12, // LD4 as LD2 is not a user LED
-    LED3        = PD_13, // orange
-    LED4        = PD_12, // green
-    LED5        = PD_14, // red
-    LED6        = PD_15, // blue
-    LED_RED     = LED5,
+    LED1        = PD_14, // RED
+    LED2        = PD_13, // ORANGE
+    LED3        = PD_15, // BLUE
+    LED_USB     = PD_12, // USB
     SERIAL_TX   = STDIO_UART_TX, /* USART2 */
     SERIAL_RX   = STDIO_UART_RX,
     USBTX       = STDIO_UART_TX, /* USART2 */

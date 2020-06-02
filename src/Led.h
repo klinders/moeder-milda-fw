@@ -21,32 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#ifndef LED_H
+#define LED_H
 #include <mbed.h>
-#include <RH_RF95.h>
-#include <Mildabus.h>
 
-#include "gpio.h"
-#include "lora.h"
+class Led
+{
+private:
+    DigitalOut output;
+    enum bl{
+        BLINK_NONE,
+        BLINK_NORMAL,
+        BLINK_FAST,
+        BLINK_STRIKE
+    } blink_state;
+    uint32_t last_toggle;
+    void toggle(void);
+    void high(void);
+    void low(void);
+    bool read(void);
+public:
+    Led(PinName pin);
+    void on(void);
+    void off(void);
+    void blink(void);
+    void blink_fast(void);
+    void strike(void);
+    void update(void);
+};
 
-// Setup Mildabus in master mode
-CAN can1(CAN1_RX, CAN1_TX);
-Mildabus bus1(&can1, false);
+void led_init(void);
 
-void initialize(void);
+// Amount of LED pins connected
+#define LED_COUNT 4
 
-int main() {
+// Define the LED objects
+extern Led red_led;
+extern Led orange_led;
+extern Led blue_led;
+extern Led usb_led;
 
-  initialize();
-
-  while(1) {
-    // put your main code here, to run repeatedly:
-  }
-}
-
-void initialize(){
-  gpio_init();
-  blue_led.blink_fast();
-  bus1.prepare();
-  blue_led.off();
-  //lora_init();
-}
+#endif
