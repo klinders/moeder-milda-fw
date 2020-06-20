@@ -44,33 +44,38 @@ static void led_handler(void);
 
 void Led::on(void){
     Led::blink_state = Led::BLINK_NONE;
-    Led::high();
+    Led::_high();
 }
 
 void Led::off(void){
     Led::blink_state = Led::BLINK_NONE;
-    Led::low();
+    Led::_low();
 }
 
-void Led::toggle(void){
-    if(Led::read()){
-        Led::low();
+void Led::_toggle(void){
+    if(Led::_read()){
+        Led::_low();
     }else{
-        Led::high();
+        Led::_high();
     }
 }
 
-void Led::low(void){
+void Led::toggle(void){
+    Led::blink_state = Led::BLINK_NONE;
+    Led::_toggle();
+}
+
+void Led::_low(void){
     Led::output.write(0);
     Led::last_toggle = led_counter;
 }
 
-void Led::high(void){
+void Led::_high(void){
     Led::output.write(1);
     Led::last_toggle = led_counter;
 }
 
-bool Led::read(){
+bool Led::_read(){
     return Led::output.read();
 }
 
@@ -91,22 +96,22 @@ void Led::update(void){
     {
     case Led::BLINK_NORMAL:
         if(led_counter - Led::last_toggle > 100){
-            Led::toggle();
+            Led::_toggle();
         }
         break;
     case Led::BLINK_FAST:
         if(led_counter - Led::last_toggle > 20){
-            Led::toggle();
+            Led::_toggle();
         }
         break;
     case Led::BLINK_STRIKE:
-        if(Led::read()){
+        if(Led::_read()){
             if(led_counter - last_toggle > 1){
-                Led::low();
+                Led::_low();
             }
         }else{
             if(led_counter - last_toggle > 500){
-                Led::high();
+                Led::_high();
             }
         }
     default:

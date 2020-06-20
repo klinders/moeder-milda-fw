@@ -1,0 +1,29 @@
+{
+    "files.associations": {
+        "mstd_type_traits": "cpp",
+        "*.tpp": "cpp",
+        "mstd_functional": "cpp",
+        "mstd_memory": "cpp",
+        "mstd_utility": "cpp",
+        "array": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "optional": "cpp",
+        "system_error": "cpp",
+        "initializer_list": "cpp",
+        "mstd_iterator": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "*.tcc": "cpp"
+    }
+}

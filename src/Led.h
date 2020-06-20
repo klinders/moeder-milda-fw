@@ -36,14 +36,15 @@ private:
         BLINK_STRIKE
     } blink_state;
     uint32_t last_toggle;
-    void toggle(void);
-    void high(void);
-    void low(void);
-    bool read(void);
+    void _high(void);
+    void _low(void);
+    bool _read(void);
+    void _toggle(void);
 public:
     Led(PinName pin);
     void on(void);
     void off(void);
+    void toggle(void);
     void blink(void);
     void blink_fast(void);
     void strike(void);

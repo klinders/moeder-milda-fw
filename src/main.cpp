@@ -28,25 +28,39 @@
 #include "gpio.h"
 #include "lora.h"
 
-// Setup Mildabus in master mode
-CAN can1(CAN1_RX, CAN1_TX);
-Mildabus bus1(&can1, false);
+Mildabus bus1(CAN1_RX, CAN1_TX, true, 0, true);
+MB_Subscription* s;
 
 void initialize(void);
+void event(MB_Message&);
 
 int main() {
 
-  initialize();
-
-  while(1) {
-    // put your main code here, to run repeatedly:
-  }
+	initialize();
+	int count = 0;
+	while(1) {
+		// put your main code here, to run repeatedly:
+		if(button.read()){
+			bus1.send(MB_Event::LIGHTS_ON);
+			wait_ms(200);
+			count++;
+			if(count == 10){
+				bus1.unsubscribe(s);
+			}
+		}
+	}
 }
 
 void initialize(){
-  gpio_init();
-  blue_led.blink_fast();
-  bus1.prepare();
-  blue_led.off();
-  //lora_init();
+	gpioInit();
+	blue_led.blink_fast();
+	bus1.getConnected();
+	s = bus1.subscribe(callback(&event), MB_Message::ALL);
+
+	//blue_led.off();
+	//lora_init();
+}
+
+void event(MB_Message& m){
+	red_led.toggle();
 }
